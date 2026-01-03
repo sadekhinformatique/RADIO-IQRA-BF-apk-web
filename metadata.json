@@ -1,0 +1,7 @@
+{
+  "name": "Radio iqra bf lavoix du saint coran",
+  "description": "A comprehensive radio broadcasting dashboard featuring live streaming with fallback logic, automated prayer schedules based on geolocation, and a secure administration panel.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
