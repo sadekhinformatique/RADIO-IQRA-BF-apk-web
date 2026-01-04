@@ -1,0 +1,12 @@
+
+services:
+  - type: web
+    name: radio-iqra-bf
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_KEY
+        sync: false # À configurer manuellement dans le dashboard Render pour Gemini
