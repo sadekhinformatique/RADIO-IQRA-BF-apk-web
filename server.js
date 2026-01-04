@@ -6,21 +6,20 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-// Render fournit automatiquement la variable PORT
 const PORT = process.env.PORT || 10000; 
 
 app.use(express.json());
 
-// Servir les fichiers statiques (racine et dossier dist généré par esbuild)
-app.use(express.static(path.join(__dirname, '.')));
+// Ordre important : d'abord le dossier dist, puis la racine
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '.')));
 
-// API simple pour tester la santé de l'app sur Render
+// API Health Check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'healthy', station: "Radio Iqra BF" });
 });
 
-// Support du routage React (SPA)
+// Pour toutes les autres routes, renvoyer index.html (SPA routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
