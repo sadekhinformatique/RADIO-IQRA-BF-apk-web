@@ -1,8 +1,8 @@
 
 export const DEFAULT_RADIO_CONFIG = {
-  stationName: "Radio Al-Hikmah",
-  streamUrl: "https://icecast.skyrock.net/s/natio_mp3_128k", // Placeholder stream
-  fallbackUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Backup test file
+  stationName: "Radio Iqra BF",
+  streamUrl: "https://icecast.skyrock.net/s/natio_mp3_128k", // URL à remplacer par votre flux réel
+  fallbackUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
   isLive: true
 };
 
