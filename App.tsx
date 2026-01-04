@@ -59,7 +59,7 @@ const App: React.FC = () => {
         </main>
 
         <footer className="text-center py-8 text-zinc-500 text-xs hidden lg:block">
-          &copy; {new Date().getFullYear()} {config.stationName} — Développé pour Infomaniak Node.js
+          &copy; {new Date().getFullYear()} {config.stationName} — Plateforme de Diffusion Live
         </footer>
       </div>
     </Router>

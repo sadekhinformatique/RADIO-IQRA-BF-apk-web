@@ -8,22 +8,38 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 10000; 
 
-app.use(express.json());
-
-// Ordre important : d'abord le dossier dist, puis la racine
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, '.')));
-
-// API Health Check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'healthy', station: "Radio Iqra BF" });
+// Logging middleware for debugging on Render
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
 });
 
-// Pour toutes les autres routes, renvoyer index.html (SPA routing)
+app.use(express.json());
+
+// Serve dist folder with high priority
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
+
+// Serve root static files (index.html, etc.)
+app.use(express.static(path.join(__dirname, '.')));
+
+// API for Render Uptime/Health
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'online', 
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV 
+  });
+});
+
+// Catch-all for React Router SPA logic
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`[Radio Iqra] Serveur actif sur le port ${PORT}`);
+  console.log('====================================');
+  console.log(`🚀 Radio Iqra Server is running!`);
+  console.log(`📡 Port: ${PORT}`);
+  console.log(`🌍 Mode: ${process.env.NODE_ENV || 'development'}`);
+  console.log('====================================');
 });
