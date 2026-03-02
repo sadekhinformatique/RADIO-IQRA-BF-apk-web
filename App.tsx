@@ -1,12 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Radio, Clock, Settings, Headphones, Play, Pause, Volume2, MapPin, ShieldCheck, LogIn } from 'lucide-react';
+import { Radio, Clock, Headphones, Play, Pause, Volume2, MapPin, ShieldCheck, LogIn } from 'lucide-react';
 import { View, PrayerTimings, RadioConfig } from './types';
 import { DEFAULT_RADIO_CONFIG } from './constants';
 import RadioPlayer from './components/RadioPlayer';
 import PrayerTimes from './components/PrayerTimes';
-import Admin from './components/Admin';
 
 const Navigation = () => {
   const location = useLocation();
@@ -24,10 +23,6 @@ const Navigation = () => {
           <Clock size={20} />
           <span className="text-xs lg:text-sm font-medium">Prières</span>
         </Link>
-        <Link to="/admin" className={`flex flex-col lg:flex-row items-center gap-1 lg:gap-2 px-4 py-2 rounded-lg transition-all ${location.pathname === '/admin' ? activeClass : inactiveClass}`}>
-          <Settings size={20} />
-          <span className="text-xs lg:text-sm font-medium">Admin</span>
-        </Link>
       </div>
     </nav>
   );
@@ -39,12 +34,6 @@ const App: React.FC = () => {
     return saved ? JSON.parse(saved) : DEFAULT_RADIO_CONFIG;
   });
 
-  const updateConfig = (newConfig: Partial<RadioConfig>) => {
-    const updated = { ...config, ...newConfig };
-    setConfig(updated);
-    localStorage.setItem('radio_config', JSON.stringify(updated));
-  };
-
   return (
     <Router>
       <div className="flex flex-col min-h-screen pb-20 lg:pb-0 lg:pt-16">
@@ -54,7 +43,6 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<RadioPlayer config={config} />} />
             <Route path="/priere" element={<PrayerTimes />} />
-            <Route path="/admin" element={<Admin config={config} onUpdate={updateConfig} />} />
           </Routes>
         </main>
 

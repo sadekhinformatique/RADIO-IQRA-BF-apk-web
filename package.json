@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "mkdir -p dist && esbuild index.tsx --bundle --outfile=dist/bundle.js --loader:.tsx=tsx --loader:.ts=ts --minify --sourcemap --platform=browser --format=iife --define:process.env.NODE_ENV='\"production\"' --define:process.env.API_KEY='\"'\"$API_KEY\"'\"'",
+    "build": "mkdir -p dist && esbuild index.tsx --bundle --outfile=dist/bundle.js --loader:.tsx=tsx --loader:.ts=ts --minify --sourcemap --platform=browser --format=iife --define:process.env.NODE_ENV='\"production\"' --define:process.env.API_KEY='\"'\"$API_KEY\"'\"' --define:process.env.GEMINI_API_KEY='\"'\"$GEMINI_API_KEY\"'\"'",
     "dev": "nodemon server.js"
   },
   "dependencies": {

@@ -16,7 +16,8 @@ const RadioPlayer: React.FC<Props> = ({ config }) => {
   const [quote, setQuote] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  console.log("Initializing Gemini with key length:", process.env.GEMINI_API_KEY?.length || 0);
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
   useEffect(() => {
     const fetchInspiration = async () => {
